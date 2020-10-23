@@ -1,0 +1,89 @@
+{
+"origin":["#MONSTERITEM#"],
+"MONSTERITEM": [
+"A #item# that has been in my family for centuries has been stolen! I've heard that a #basemonster# named #monster# has it, and that he roams the #level# level of #realm#. Please retrieve it for me!",
+"I was traveling in #realm#, when I was ambushed by #monster#, a #basemonster# - it stole my #item#, and made off into the dungeon! Please get it back for me! I followed it as far as level #levelsingular#...",
+"A #basemonster# called #monster# attacked a caravan of goods bound for town, and took a valuable #item# from the wagons!  It has retreated to level #levelsingular# in #realm#. If you return it to me, I can make it up to you!",
+"That sneaky #monster#...at our last card game he cheated me out of my favorite #item#! Can you get it back for me? He's a #basemonster# that hangs out on level #levelsingular# in #realm#.",
+"Help! I borrowed my friend's only #item#, but a #basemonster# on level #levelsingular# of #realm# got the jump on me and stole it. Please get it back before my friend gets home! I think the thug's name is #monster#.",
+"Who will help us all? A very powerful #item# has fallen into the wrong claws - namely, #monster#. Track down the #basemonster# where it lurks on level #levelsingular# in #realm#, and bring the #item# back before it can be used for evil!",
+],
+
+"KILLMONSTER": [
+"I've heard tales of a #basemonster# called #monster#, who roams around the #level# level of #realm#. I'd sure sleep better if I knew that #basemonster# wasn't around.",
+"There's a #basemonster# who's been stealing my chickens! Please help me! Do away with #monster#, and my livestock will be safe once again! I heard he lives on level #levelsingular# of #realm#.",
+"#monster# the #basemonster#, an evil beast who resides on the #level# level of #realm#, is becoming even more bold! It must be stopped!  Please take care of it for the town, and we won't forget the favor.",
+"#monster# ate my sweet little Fluffy! That #basemonster# is a menace and must be stopped. Will you descend to level #levelsingular# of #realm# and end its reign of terror?",
+"There is a bounty for a monster on the #level# level of #realm# that calls itself #monster#. Defeat this creature for the sake of our town.",
+"Lurking on the #level# level of #realm# is a terrible monster named #monster#. This creature must be stopped!",
+"#monster# on the #level# level of #realm# has been devising a plan to take over the realm. Some say this creature can talk! Will you help rid us of this fiend?",
+"Level #levelsingular# of #realm# has become infested with #basemonster#s! If you can kill #monstercount# of them, I'll compensate you fairly....",
+"A nasty group of #basemonster#s have been making raids on our town! I hear they've taken up residence on level #levelsingular# of #realm#. Clear them out, and the town will be grateful!",
+"A horde of #basemonster#s are lurking on level #levelsingular# of #realm#, attacking adventurers who pass by. It's bad for trade - do away with the beasts and you will have our gratitude....",
+"Those nasty #basemonster#s are at it again. They've set up camp on level #levelsingular# of #realm#, roasting every adventurer that comes their way. Oh, but don't worry - I'm sure YOU can handle them. Come back when you've finished the job.",
+"Our catacombs aren't what they used to be, with those #basemonster#s stinking up the place. They've turned all of level #levelsingular# in #realm# into one giant, filthy lair. If someone got rid of them, I'd be inclined to offer a reward.",
+],
+
+"FINDITEM": [
+"I was traveling in #realm#, and lost my #item#! If you'd be kind enough to get it back for me, I'd pay you for your trouble - I'm pretty sure I lost it on the #level# level.",
+"I can't believe it! My #item#, a priceless family heirloom, was lost by my brother on level #levelsingular# of #realm#. Get it back for me, and I'll make it worth your while!",
+"The #item#, an artifact that has long guarded our fair town, has been lost!  Beasts came in the night, and stole it away - I've heard to level #levelsingular# of #realm#. Return it, and you will be rewarded.",
+"I've always wanted a fine #item#, but I just don't trust these shifty merchants. I've heard you can find all sorts of things in the dungeons - especially on level #levelsingular# of #realm#. If you run across one, I'd be happy to buy it from you!",
+"A hero? Perfect! I'm on a scavenger hunt - a dangerous one. I don't suppose you'll help me find a gently used #item#? Level #levelsingular# of #realm# is a great place to look. Bring one back and I'll share the prize!",
+],
+"ARMYITEM": [
+"A #basemonster# named #monster# and its army of #minion#s has stolen a #item# and taken it to level #levelsingular# of #realm# - defeat the rabble, and return the #item#!",
+"A gang of #basemonster#s, and their thug leader #monster#, knocked me out and stole my favorite #item#. I want it back, and I'm offering a reward! You can find them on level #levelsingular# of #realm#.",
+],
+
+"KILLARMY": [
+"#monster# the #basemonster# has assembled an army of #minion#s and is advancing on the town from level #levelsingular# of #realm#! Help us by defeating them and the town will reward you for your bravery!",
+],
+"DELUGE": [
+"#monster# on the #level# level of #realm# has been corrupted. It needs to be destroyed!",
+"Please venture down to the #level# level of #realm# and eradicate #monster#.",
+"#realm# is in grave danger as #monster# is growing stronger every day. You must destroy it immediately! Find it on the #level# level of the dungeon.",
+],
+
+"DEFEND": [
+"A guardian spirit is under seige and has taken refuge in #monster# on the #level# level of #realm#. Activate the shrine, and defend it from all monsters while it recharges!",
+"My friend #monster# was wounded in battle! She stayed on level #levelsingular# of #realm# while I went for help. Can you get down there and activate the shrine, then keep her safe until she recovers?",
+"There's a shrine that needs to be activated on the #level# level of #realm#. #monster# has trapped a good spirit; you must find a way to free it!",
+"One of the realm's spirits has been captured within #monster# on the #level# level of #realm#. You must activate the shrine and, while it recharges, defend it from the onslaught of summoned creatures.",
+"#monster# has captured an innocent spirit on the #level# level of #realm#. Defend it from the summoned monsters once the shrine is activated. Beware--the shrine recharges, sending waves of attackers!",
+],
+
+"ESCORTIN": [
+"Could you please escort #target# to the #level# level of #realm#?",
+"We want to set up an outpost on the #level# level of #realm#. My assistant, #target#, needs an escort. Will you lead him there?",
+"This little #basetarget# needs to get home. Can you show it the way? Try level #levelsingular# of #realm#.",
+"Alright, we're done here. Take this no-good #target# back where it belongs - the #level# level of #realm#!",
+" Shh! We're about to infiltrate a notorious group of criminals. Escort our undercover agent, #target# here, down to level #levelsingular# of #realm# and then report back to me.",
+"Could you please escort my apprentice #target# to the #level# level of #realm#? There's a handsome reward after the task is completed.",
+"#target# needs a brave escort to the #level# level of #realm#. Would you mind performing this task?",
+"My friend needs someone brave to escort him to the #level# level of #realm#. #target# would be most grateful.",
+],
+
+"ESCORTOUT": [
+"Could you please escort #target# out of #realm#? ",
+"My pal #target# needs your help! Low blood sugar, you see. Can you escort her out of the dungeon, one level at a time?",
+"Rats, I left my lunch at home. Will you help #target# retrieve it? Just show him out of the dungeon, he'll handle it from there.",
+"Please, you must help me--#target# the #basemonster# has my sister trapped in the dungeon! She's hiding right now, but you'd better find #target# before it finds her. Quick, get down to level#levelsingular#\!",
+"I need someone to escort #target# out of the underground dungeon. Return to me for a generous reward!",
+"#target# needs an escort back to town. Would you be kind enough to help us out?",
+],
+
+"HERD": [
+"I have a herd of #basemonster#s that somehow got loose on the #level# level of #realm#. Would you please collect all #monstercount# of them and bring them to me?",
+"I am but a humble #basemonster# researcher. I have heard tales of a group of rare specimens on the #level# level of #realm#. Would you please collect all #monstercount#?",
+"Oh, my poor #basemonster#s! I didn't mean to fall asleep, but now they're scared and lost on the #level# level of #realm#. Can you bring them home for me? Make sure you get all #monstercount#!",
+"Can you help me? I run a camp for troubled #basemonster#s, and I've been told a group of #monstercount# loiter down on level #levelsingular# of #realm#. Could you round them up and bring them back here? It's for their own good!",
+"Greetings, friend! I am a scholar in the arts of alchemy and enchantments. My colleague needs my assistance in formulating a new enchanting spell. I will need a few ingredients, including one that can be obtained from #monstercount# #basemonster#s. You may gather these on the #level# level of #realm#.",
+"Please help me collect all #monstercount# of my #basemonster# herd on the #level# level of #realm# dungeon. I thank thee for your humble service!",
+"My herd of #basemonster#s has been captured by a sinister creature and let loose on the #level# level of #realm#. There are #monstercount# in total. Please be careful with them!",
+],
+"REALMBOSS": [
+"Our realm has been plagued by the forces of #monster#. Only a legendary hero like you can stop him! I believe he is somewhere on the #level# level of the dungeon in #realm#. ",
+],
+
+}
