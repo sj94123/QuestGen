@@ -5,7 +5,7 @@
 from nltk.tokenize import sent_tokenize
 import tracery
 import json
-from gpt2_client import GPT2Client
+from prompted import generate_prompted
 import os
 import nltk.data
 
@@ -21,8 +21,6 @@ if not os.path.isdir(model_path):
 	gpt2.download_gpt2(model_name=model_name)   # model is saved into current directory under /models/*/
 
 # start gpt-2
-gpt2 = GPT2Client('345M') # This could also be `345M`, `774M`, or `1558M`. Rename `save_dir` to anything.
-gpt2.load_model(force_download=False) # Use cached versions if available.
 # TODO: finetune?
 
 # open our tracery grammar
@@ -45,7 +43,7 @@ with open('quests.json', 'r') as f:
         # (except the last sentence)
         for i in range(0, len(sentences) - 1):
             sent = sentences[i]
-            gpt_raw = gpt2.generate_batch_from_prompts([sent])[0]
+            gpt_raw = generate_prompted(model_name=model_name, temperature=0.2, length=64, top_k=40, prompt=sent)
             gpt_sent = sent_tokenize(gpt_raw)[0]
             final_quest = "{} {} {}".format(final_quest, sent, gpt_sent)
 
