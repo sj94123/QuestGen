@@ -8,8 +8,7 @@ import json
 from prompted import generate_prompted
 import os
 import nltk.data
-from flask import Flask
-from flask import request
+from flask import Flask,request,make_response
 app = Flask(__name__)
 
 # we need this to split things into sentences
@@ -39,6 +38,10 @@ def quest_gen():
 	sent = request.args.get("sent")
 	gpt_raw = generate_prompted(model_name=model_name, temperature=0.2, length=64, top_k=40, prompt=sent)
 	gpt_sent = sent_tokenize(gpt_raw)[0]
-	return gpt_sent
+	print("prompt = " + sent)
+	print("gpt response = " + gpt_sent)
+	response = make_response(gpt_sent)
+	response.headers.add('Access-Control-Allow-Origin', '*')
+	return response
 
 app.run(port=1234)
