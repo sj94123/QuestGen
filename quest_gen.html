@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en-us" >
+  <meta name="twitter:card" content="Quest Generator"></meta>
+  <meta name="twitter:text:title" content="Quest Gen"></meta>
+  <meta property="og:title" content="Quest Gen" />
+  <meta property="og:description" content="An interactive quest generator" />
+  <head>
+    <title>Quest Gen</title>
+    <meta name="robots" content="ALL">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://badland.io/static/tracery.js" type="text/javascript"></script>
+  </head>
+  <body onload="setTimeout(() => generate_quest(), 3000)">
+    <script type="text/javascript">
+      function generate_quest() {
+	  var reg = document.getElementById("quest_region");
+
+	  var grammar = {}
+	  grammar.origin = "Do a task";
+	  console.log("Final grammar is: " + grammar);
+	  var trace = tracery.createGrammar(grammar);
+
+	  var quest = trace.flatten("#origin#");
+
+	  console.log("Final quest: " + quest);
+	  reg.textContent = quest;
+      }
+
+      function post_text(value) {
+	  var passage = document.getElementById("passage_region");
+	  var newtext = document.createTextNode(value);
+	  passage.appendChild(newtext);
+	  passage.appendChild(document.createElement("br"));
+      }
+
+      function process_usertext() {
+	  var usertext = document.getElementById("usertext");
+	  post_text(usertext.value);
+
+	  usertext.value = "";
+      }
+    </script>
+
+    <br>
+    <div id="quest_region">waiting for server...</div>
+    <br><br><hr><br><br>
+    <div id="passage_region"></div>
+
+    <br><hr>
+    <div id="input_region">
+      <form onsubmit="process_usertext(); return false;">
+	<br><br>
+	<input type="button" onclick="process_usertext()" value="Enter your action:">
+	<input type="text" id="usertext">
+	<br><br>
+      </form>
+    </div>
+  </body>
+</html>
