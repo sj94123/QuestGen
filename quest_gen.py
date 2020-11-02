@@ -8,6 +8,9 @@ import json
 from prompted import generate_prompted
 import os
 import nltk.data
+from flask import Flask
+from flask import request
+app = Flask(__name__)
 
 # we need this to split things into sentences
 nltk.download('punkt')
@@ -24,28 +27,18 @@ if not os.path.isdir(model_path):
 # TODO: finetune?
 
 # open our tracery grammar
-with open('quests.json', 'r') as f:
-    # fold it into one line so json can load it
-    txt = ''.join(f.readlines())
-    txt = txt.replace('\n', '')
-    rules = json.loads(txt)
-    grammar = tracery.Grammar(rules)
-    for i in range(0, 10):
-        print()
-        print('===== quest =====')
-        # generate a procedural quest using tracery
-        proc_generated = grammar.flatten("#origin#")
-        # split it into sentences
-        sentences = sent_tokenize(proc_generated)
+f = open('quests.json', 'r')
+# fold it into one line so json can load it
+txt = ''.join(f.readlines())
+txt = txt.replace('\n', '')
+rules = json.loads(txt)
+grammar = tracery.Grammar(rules)
 
-        final_quest = ""
-        # generate one gpt-2 sentence for each sentence in base
-        # (except the last sentence)
-        for i in range(0, len(sentences) - 1):
-            sent = sentences[i]
-            gpt_raw = generate_prompted(model_name=model_name, temperature=0.2, length=64, top_k=40, prompt=sent)
-            gpt_sent = sent_tokenize(gpt_raw)[0]
-            final_quest = "{} {} {}".format(final_quest, sent, gpt_sent)
+@app.route("/quest_gen", methods=["GET"])
+def quest_gen():
+	sent = request.args.get("sent")
+	gpt_raw = generate_prompted(model_name=model_name, temperature=0.2, length=64, top_k=40, prompt=sent)
+	gpt_sent = sent_tokenize(gpt_raw)[0]
+	return gpt_sent
 
-        print(final_quest + sentences[len(sentences) - 1])
-        print('================')
+app.run(port=1234)
