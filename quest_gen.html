@@ -14,6 +14,19 @@
   </head>
   <body onload="setTimeout(() => generate_quest(), 3000)">
     <script type="text/javascript">
+      function request_one_gpt2_sent(prompt) {
+	  var xmlHttp = new XMLHttpRequest();
+	  var url = "https://badland.io/quest_gen?sent=" + prompt;
+	  var resp = "";
+	  xmlHttp.onreadystatechange = function() {
+              if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+		  resp = xmlHttp.responseText;
+	  }
+	  xmlHttp.open("GET", url, false); // true for asynchronous
+	  xmlHttp.send(null);
+	  return resp;
+      }
+
       function generate_quest() {
 	  var reg = document.getElementById("quest_region");
 
@@ -23,9 +36,11 @@
 	  var trace = tracery.createGrammar(grammar);
 
 	  var quest = trace.flatten("#origin#");
+	  var gpt = request_one_gpt2_sent(quest);
+	  var fin = quest + " " + gpt;
 
-	  console.log("Final quest: " + quest);
-	  reg.textContent = quest;
+	  console.log("Final quest: " + fin);
+	  reg.textContent = fin;
       }
 
       function post_text(value) {
