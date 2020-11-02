@@ -14,9 +14,9 @@
   </head>
   <body onload="setTimeout(() => generate_quest(), 3000)">
     <script type="text/javascript">
-      function request_one_gpt2_sent(prompt) {
+      function request_one_gpt2_sent(prompt, num) {
 	  var xmlHttp = new XMLHttpRequest();
-	  var url = "https://badland.io/quest_gen?sent=" + prompt;
+	  var url = "https://badland.io/quest_gen?num=" + num + " + &sent=" + prompt;
 	  var resp = "";
 	  xmlHttp.onreadystatechange = function() {
               if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -31,16 +31,33 @@
 	  var reg = document.getElementById("quest_region");
 
 	  var grammar = {}
-	  grammar.origin = "Do a task";
+	  grammar.origin = ["#electrical#", "#administration#"];
+	  grammar.electrical = [
+	      "The emergency lights are flashing. You need to plug in the wires to turn the alarms off.",
+	      "Too much power was being drawn and all the fuses blew. Flip the switches back on.",
+	      "Restart the generator to restore power to the ship. Don't take too long, the oxygen won't last forever.",
+	  ];
+	  grammar.administration = "Swipe the credit card. Hopefully your transaction won't be declined.";
 	  console.log("Final grammar is: " + grammar);
 	  var trace = tracery.createGrammar(grammar);
 
 	  var quest = trace.flatten("#origin#");
-	  var gpt = request_one_gpt2_sent(quest);
-	  var fin = quest + " " + gpt;
+	  var qs = quest.split(".");
+	  var fin = "";
+	  for (var i = 0; i < qs.length - 1; i++) {
+	      qs[i] = qs[i] + ".";
+	      var gpt = request_one_gpt2_sent(qs[i], Math.floor(Math.random() * 2) + 1);
+	      fin = fin + qs[i] + " " + gpt + " ";
+	  }
+	  fin += "\n";
 
 	  console.log("Final quest: " + fin);
-	  reg.textContent = fin;
+	  var paragraphs = fin.split("\n");
+	  reg.textContent = "";
+	  for (var i = 0; i < qs.length; i++) {
+	      reg.appendChild(document.createTextNode(paragraphs[i]));
+	      reg.appendChild(document.createElement("br"));
+	  }
       }
 
       function post_text(value) {
