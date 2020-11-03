@@ -44,7 +44,7 @@
 	  var quest = trace.flatten("#origin#");
 	  var qs = quest.split(".");
 	  var fin = "";
-	  for (var i = 0; i < qs.length - 1; i++) {
+	  for (var i = 0; i < qs.length; i++) {
 	      qs[i] = qs[i] + ".";
 	      var gpt = request_one_gpt2_sent(qs[i], Math.floor(Math.random() * 2) + 1);
 	      fin = fin + qs[i] + " " + gpt + " ";
