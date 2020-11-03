@@ -14,6 +14,49 @@
   </head>
   <body onload="setTimeout(() => generate_quest(), 3000)">
     <script type="text/javascript">
+      var grammar = {}
+      grammar.origin = ["electrical", "cafeteria", "administration"];
+      grammar.cafeteria = ["Wash the dishes."];
+      grammar.cafeteria_tasks = ["wash the dishes"];
+      grammar.electrical = [
+	  "The emergency lights are flashing. You need to plug in the wires to turn the alarms off.",
+	  "Too much power was being drawn and all the fuses blew. Flip the switches back on.",
+	  "Restart the generator to restore power to the ship. Don't take too long, the oxygen won't last forever.",
+      ];
+      grammar.electrical_tasks = [
+	  "plug in the wires",
+	  "flip the switches on",
+	  "restart the generator",
+      ];
+      grammar.administration = ["Swipe the credit card. Hopefully your transaction won't be declined."];
+      grammar.administration_tasks = ["swipe the credit card"];
+      console.log("Final grammar is: " + grammar);
+
+      var loc = Math.floor(Math.random() * grammar.origin.length);
+      var loc_string = grammar.origin[loc];
+      var script = Math.floor(Math.random() * grammar[loc_string].length);
+      var quest = grammar[loc_string][script];
+      var task = grammar[loc_string + "_tasks"][script];
+      console.log("User needs to perform: " + task);
+
+      function post_text(value) {
+	  var passage = document.getElementById("passage_region");
+	  var newtext = document.createTextNode(value);
+	  passage.appendChild(newtext);
+	  passage.appendChild(document.createElement("br"));
+      }
+
+      var cur_loc = "cafeteria";
+      function print_available_actions() {
+	  post_text("...> Actions available are:");
+	  for (var i = 0; i < grammar.origin.length; i++) {
+	      post_text("  -  move-to " + grammar.origin[i]);
+	  }
+	  for (var i = 0; i < grammar[cur_loc].length; i++) {
+	      post_text("  -  " + grammar[cur_loc + "_tasks"][i]);
+	  }
+      }
+
       function request_one_gpt2_sent(prompt, num) {
 	  var xmlHttp = new XMLHttpRequest();
 	  var url = "https://badland.io/quest_gen?num=" + num + " + &sent=" + prompt;
@@ -30,21 +73,9 @@
       function generate_quest() {
 	  var reg = document.getElementById("quest_region");
 
-	  var grammar = {}
-	  grammar.origin = ["#electrical#", "#administration#"];
-	  grammar.electrical = [
-	      "The emergency lights are flashing. You need to plug in the wires to turn the alarms off.",
-	      "Too much power was being drawn and all the fuses blew. Flip the switches back on.",
-	      "Restart the generator to restore power to the ship. Don't take too long, the oxygen won't last forever.",
-	  ];
-	  grammar.administration = "Swipe the credit card. Hopefully your transaction won't be declined.";
-	  console.log("Final grammar is: " + grammar);
-	  var trace = tracery.createGrammar(grammar);
-
-	  var quest = trace.flatten("#origin#");
 	  var qs = quest.split(".");
 	  var fin = "";
-	  for (var i = 0; i < qs.length; i++) {
+	  for (var i = 0; i < qs.length - 1; i++) {
 	      qs[i] = qs[i] + ".";
 	      var gpt = request_one_gpt2_sent(qs[i], Math.floor(Math.random() * 2) + 1);
 	      fin = fin + qs[i] + " " + gpt + " ";
@@ -54,24 +85,43 @@
 	  console.log("Final quest: " + fin);
 	  var paragraphs = fin.split("\n");
 	  reg.textContent = "";
-	  for (var i = 0; i < qs.length; i++) {
+	  for (var i = 0; i < paragraphs.length; i++) {
 	      reg.appendChild(document.createTextNode(paragraphs[i]));
 	      reg.appendChild(document.createElement("br"));
 	  }
+	  print_available_actions();
       }
 
-      function post_text(value) {
-	  var passage = document.getElementById("passage_region");
-	  var newtext = document.createTextNode(value);
-	  passage.appendChild(newtext);
-	  passage.appendChild(document.createElement("br"));
-      }
-
+      var won = false;
       function process_usertext() {
-	  var usertext = document.getElementById("usertext");
-	  post_text(usertext.value);
+	  if (won) {
+	      return false;
+	  }
 
+	  var usertext = document.getElementById("usertext");
+
+	  var words = usertext.value.split(" ");
+	  var matches = usertext.value.toLowerCase().includes(task.toLowerCase());
+	  if (words[0] == "move-to") {
+	      post_text(usertext.value);
+	      if (grammar.origin.includes(words[1])) {
+		  cur_loc = words[1];
+		  post_text("...> moved to " + words[1]);
+		  print_available_actions();
+	      }
+	  } else if (matches && cur_loc != loc_string) {
+	      post_text(usertext.value);
+	      post_text("...> You're not in the right place!");
+	  } else if (matches && cur_loc == loc_string) {
+	      post_text(usertext.value);
+	      post_text("...> You won!");
+	      won = true;
+	  } else {
+	      post_text(usertext.value);
+	  }
+	  
 	  usertext.value = "";
+	  return false;
       }
     </script>
 
@@ -82,9 +132,9 @@
 
     <br><hr>
     <div id="input_region">
-      <form onsubmit="process_usertext(); return false;">
+      <form onsubmit="return process_usertext()">
 	<br><br>
-	<input type="button" onclick="process_usertext()" value="Enter your action:">
+	<input type="button" onsubmit="return process_usertext()" value="Enter your action:">
 	<input type="text" id="usertext">
 	<br><br>
       </form>
