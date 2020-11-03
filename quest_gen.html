@@ -50,10 +50,10 @@
       function print_available_actions() {
 	  post_text("...> Actions available are:");
 	  for (var i = 0; i < grammar.origin.length; i++) {
-	      post_text("  -  move-to " + grammar.origin[i]);
+	      post_text("move-to " + grammar.origin[i]);
 	  }
 	  for (var i = 0; i < grammar[cur_loc].length; i++) {
-	      post_text("  -  " + grammar[cur_loc + "_tasks"][i]);
+	      post_text(grammar[cur_loc + "_tasks"][i]);
 	  }
       }
 
@@ -134,7 +134,7 @@
     <div id="input_region">
       <form onsubmit="return process_usertext()">
 	<br><br>
-	<input type="button" onsubmit="return process_usertext()" value="Enter your action:">
+	<input type="button" onclick="return process_usertext()" value="Enter your action:">
 	<input type="text" id="usertext">
 	<br><br>
       </form>
