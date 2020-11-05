@@ -16,19 +16,33 @@
     <script type="text/javascript">
       var grammar = {}
       grammar.origin = ["electrical", "cafeteria", "administration"];
-      grammar.cafeteria = ["Wash the dishes."];
+      grammar.cafeteria = [
+	  ["Somebody left the plates everywhere ",
+	   "Go ahead and wash the dishes."]
+      ];
       grammar.cafeteria_tasks = ["wash the dishes"];
       grammar.electrical = [
-	  "The emergency lights are flashing. You need to plug in the wires to turn the alarms off.",
-	  "Too much power was being drawn and all the fuses blew. Flip the switches back on.",
-	  "Restart the generator to restore power to the ship. Don't take too long, the oxygen won't last forever.",
+	  ["The emergency lights are flashing, ",
+	   "The room is lit up red ",
+	   "You need to plug in the wires to turn the alarms off."],
+	  ["Too much power was being drawn and ",
+	   "The fuses probably blew",
+	   "Try flippin the switches back on."],
+	  ["The ship has lost power and ",
+	   "Don't take too long, too much time without power ",
+	   "The oxygen won't last forever",
+	   "Restart the generator"],
       ];
       grammar.electrical_tasks = [
-	  "plug in the wires",
-	  "flip the switches on",
-	  "restart the generator",
+	  "Plug in the wires",
+	  "Flip the switches on",
+	  "Restart the generator",
       ];
-      grammar.administration = ["Swipe the credit card. Hopefully your transaction won't be declined."];
+      grammar.administration = [
+	  ["The spaceship needs ",
+	   "You replaced the broken component and need to pay",
+	   "Swipe the credit card."]
+      ];
       grammar.administration_tasks = ["swipe the credit card"];
       console.log("Final grammar is: " + grammar);
 
@@ -73,14 +87,13 @@
       function generate_quest() {
 	  var reg = document.getElementById("quest_region");
 
-	  var qs = quest.split(".");
+	  var qs = quest;
 	  var fin = "";
 	  for (var i = 0; i < qs.length - 1; i++) {
-	      qs[i] = qs[i] + ".";
 	      var gpt = request_one_gpt2_sent(qs[i], Math.floor(Math.random() * 2) + 1);
 	      fin = fin + qs[i] + " " + gpt + " ";
 	  }
-	  fin += "\n";
+	  fin += qs[qs.length - 1] + "\n";
 
 	  console.log("Final quest: " + fin);
 	  var paragraphs = fin.split("\n");
@@ -125,9 +138,10 @@
       }
     </script>
 
+    <h1>Quest:</h1>
     <br>
     <div id="quest_region">waiting for server...</div>
-    <br><br><hr><br><br>
+    <br><hr><br><br>
     <div id="passage_region"></div>
 
     <br><hr>
