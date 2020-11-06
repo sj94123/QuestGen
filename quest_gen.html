@@ -164,7 +164,16 @@
       }
     </script>
 
-    <h1>Quest:</h1>
+    <h1>Welcome to QuestGen</h1>
+
+    <p>
+      QuestGen is an experimental system for generating video game quests. This version uses GPT-2 to expand procedurally generated quest prompts into more inventive story text. Sometimes the quests are simple and predictable, and sometimes they are outlandish and disorganized. It may take a minute or two for the server to respond with your quest.
+    <br><br>
+      You are a crewmate on a spaceship, and will be assigned a task. Move to the correct room and enter the action specified by the quest prompt to win the game! (Hint: look at the last sentence of each quest.)
+    </p>
+    <br>
+
+    <h3>Your captain has assigned you a task:</h3>
     <br>
     <div id="quest_region">waiting for server...</div>
     <br><hr><br><br>
@@ -176,6 +185,8 @@
 	<br><br>
 	<input type="button" onclick="return process_usertext()" value="Enter your action:">
 	<input type="text" id="usertext">
+	<br>
+	<p> Refresh for a new quest </p>
 	<br><br>
       </form>
     </div>
