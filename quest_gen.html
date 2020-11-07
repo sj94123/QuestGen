@@ -17,33 +17,57 @@
       var grammar = {}
       grammar.origin = ["electrical", "cafeteria", "administration"];
       grammar.cafeteria = [
-	  ["Somebody left the plates everywhere ",
-	   "Go ahead and wash the dishes."]
+      ["Somebody left the plates everywhere ",
+      "Go ahead and wash the dishes."],
+      ["The kitchen counters are covered in ",
+      "It smells",
+      "Try cleaning the counters."],
+      ["The tables",
+      "This chair is broken",
+      "Rebuild it before we eat."],
+      ["Interesting, the floor ",
+      "Some of the panelling on the ground has come up, and",
+      "Drill the floorboards back into place."],
       ];
-      grammar.cafeteria_tasks = ["wash the dishes"];
+      grammar.cafeteria_tasks = [
+      "wash the dishes",
+      "clean the counters",
+      "rebuild the chair",
+      "fix the floorboards",
+      ];
       grammar.electrical = [
-	  ["The emergency lights are flashing, ",
-	   "The room is lit up red ",
-	   "You need to plug in the wires to turn the alarms off."],
-	  ["Too much power was being drawn and ",
-	   "The fuses probably blew",
-	   "Try flippin the switches back on."],
-	  ["The ship has lost power and ",
-	   "Don't take too long, too much time without power ",
-	   "The oxygen won't last forever",
-	   "Restart the generator"],
+      ["The emergency lights are flashing, ",
+      "The room is lit up red ",
+      "You need to plug in the wires to turn the alarms off."],
+      ["Too much power was being drawn and ",
+      "The fuses probably blew",
+      "Try flippin the switches back on."],
+      ["The ship has lost power and ",
+      "Don't take too long, too much time without power ",
+      "The oxygen won't last forever",
+      "Restart the generator"],
       ];
       grammar.electrical_tasks = [
-	  "Plug in the wires",
-	  "Flip the switches on",
-	  "Restart the generator",
+      "Plug in the wires",
+      "Flip the switches on",
+      "Restart the generator",
       ];
       grammar.administration = [
-	  ["The spaceship needs ",
-	   "You replaced the broken component and need to pay",
-	   "Swipe the credit card."]
+      ["The spaceship needs ",
+      "You replaced the broken component and need to pay",
+      "Swipe the credit card."],
+      ["The filing cabinet is a mess",
+      "There are folders ",
+      "Reorganize the files"],
+      ["The main computer is ",
+      "The data needs to be saved",
+      "Backup the sensitive emails before something happens to them"],
       ];
-      grammar.administration_tasks = ["swipe the credit card"];
+      grammar.administration_tasks = [
+      "swipe the credit card",
+      "reorganize the files",
+      "backup the emails"
+      ];
       console.log("Final grammar is: " + grammar);
 
       var loc = Math.floor(Math.random() * grammar.origin.length);
@@ -62,13 +86,15 @@
 
       var cur_loc = "cafeteria";
       function print_available_actions() {
-	  post_text("...> Actions available are:");
+	  post_text("...> Possible Actions:");
+      	  post_text("----");
 	  for (var i = 0; i < grammar.origin.length; i++) {
 	      post_text("move-to " + grammar.origin[i]);
 	  }
 	  for (var i = 0; i < grammar[cur_loc].length; i++) {
 	      post_text(grammar[cur_loc + "_tasks"][i]);
 	  }
+      	  post_text("----");
       }
 
       function request_one_gpt2_sent(prompt, num) {
@@ -131,14 +157,23 @@
 	      won = true;
 	  } else {
 	      post_text(usertext.value);
+	      post_text("Incorrect action, try something else.");
 	  }
-	  
 	  usertext.value = "";
 	  return false;
       }
     </script>
 
-    <h1>Quest:</h1>
+    <h1>Welcome to QuestGen</h1>
+
+    <p>
+      QuestGen is an experimental system for generating video game quests. This version uses GPT-2 to expand procedurally generated quest prompts into more inventive story text. Sometimes the quests are simple and predictable, and sometimes they are outlandish and disorganized. It may take a minute or two for the server to respond with your quest.
+    <br><br>
+      You are a crewmate on a spaceship, and will be assigned a task. Move to the correct room and enter the action specified by the quest prompt to win the game! (Hint: look at the last sentence of each quest.)
+    </p>
+    <br>
+
+    <h3>Your captain has assigned you a task:</h3>
     <br>
     <div id="quest_region">waiting for server...</div>
     <br><hr><br><br>
@@ -150,6 +185,8 @@
 	<br><br>
 	<input type="button" onclick="return process_usertext()" value="Enter your action:">
 	<input type="text" id="usertext">
+	<br>
+	<p> Refresh for a new quest </p>
 	<br><br>
       </form>
     </div>
